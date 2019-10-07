@@ -223,8 +223,9 @@ func setupValuer(meta *Meta, fieldName string, record interface{}) {
 						context.GetDB().Model(value).Related(f.Field.Addr().Interface(), fieldName)
 					}
 				}
-
-				return f.Field.Interface()
+				if f.Field.IsValid() {
+					return f.Field.Interface()
+				}
 			}
 
 			return ""
